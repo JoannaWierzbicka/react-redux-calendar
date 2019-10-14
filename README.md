@@ -78,7 +78,7 @@ Podczas tworzenie Magazunu (Store), tworzymu również Readucer-a w lokalizacji 
 
 ```javascript
 {
-    meettings: [],
+    meetings: [],
 }
 ```
 
