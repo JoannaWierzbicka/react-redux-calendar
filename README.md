@@ -123,3 +123,18 @@ Używanie Redux-a nie wyklucza korzystanie z React-owego `state`. Jeśli potrzeb
 ### Redux DevTools
 
 Spróbuj teraz podłaczyć Magazyn do wtyczki Redux DevTools i zobacz jak się ona zachowuje w czasie pracy naszej aplikacji.
+
+## Usprawnij swój kod
+
+Wykonaj refaktoryzację kodu - np. zapytania do API wrzuć do osobnego pliku w katalogu `providers`.
+
+Być może będziesz chciał podzielić komponenty na mniejsze. 
+
+Przygotuj kod w taki sposób, jakby ten porojekt miał zedecydować o Twoim przyjęciu do pracy.
+
+## Dodaj odpowiedni wygląd
+
+Możesz wykorzystać komponenty z poprzedniego projektu tj. `task-react-styling`, aby upiększyć formularz w odpowiedni sposób.
+
+W tym przypadku zwóć uwagę na elementy, które były problematyczne przy przenoszeniu kodu do innego projektu. Ta wiedza powinna być Ci przydatna podczas tworzenia nastepnych rozwiązań.
+
