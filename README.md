@@ -122,7 +122,7 @@ Spróbuj teraz podłaczyć Magazyn do wtyczki Redux DevTools i zobacz jak się o
 
 Wykonaj refaktoryzację kodu - np. zapytania do API wrzuć do osobnego pliku w katalogu `providers`.
 
-Być może będziesz chciał podzielić komponenty na mniejsze. 
+Być może będziesz chciał podzielić komponenty na mniejsze lub wykorzystać Hooki. 
 
 Przygotuj kod w taki sposób, jakby ten porojekt miał zedecydować o Twoim przyjęciu do pracy.
 
