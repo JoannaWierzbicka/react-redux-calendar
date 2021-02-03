@@ -104,7 +104,7 @@ Na pewno potrzebujemy listy spotkań tj. `meetings` i potrzebujemy obu Akcji, kt
 Nasze połącznie powinno wyglądac mniej więcej tak:
 
 ```javascript
-export default connect(mapStateToProps, mapStateToProps)(Calendar);
+export default connect(mapStateToProps, mapActionToProps)(Calendar);
 ```
 
 Jeśli wszystko wykonaliśmy prawidłowo to od teraz nie musimy już korzystać ze state w `<Calendar/>`. Wystarczy, że będziemy przekazywać `this.props.meetings` do `<CalendarList />`.
