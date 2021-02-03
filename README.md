@@ -130,5 +130,5 @@ Przygotuj kod w taki sposób, jakby ten porojekt miał zedecydować o Twoim przy
 
 Możesz wykorzystać komponenty z poprzedniego projektu tj. `task-react-styling`, aby upiększyć formularz w odpowiedni sposób.
 
-W tym przypadku zwóć uwagę na elementy, które były problematyczne przy przenoszeniu kodu do innego projektu. Ta wiedza powinna być Ci przydatna podczas tworzenia nastepnych rozwiązań.
+W tym przypadku zwróć uwagę na elementy, które były problematyczne przy przenoszeniu kodu do innego projektu. Ta wiedza powinna być Ci przydatna podczas tworzenia następnych rozwiązań.
 
