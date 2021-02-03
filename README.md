@@ -60,12 +60,6 @@ http://localhost:3005/meetings
 
 ## Implementacja
 
-Będziemy wykorzystywać Redux-a dlatego w pierwszej kolejności musimy zainstalować niezbędne paczki.
-
-```
-npm i redux@4 react-readux@7
-```
-
 ### Magazyn + Reducer
 
 W pierwszej kolejności utworzymy Magazyn. Musimy zastanowić się, w którym miejscu mamy go utworzyć.
