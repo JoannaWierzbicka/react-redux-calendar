@@ -7,38 +7,6 @@
       "email": "jan@kowalski.not",
       "date": "2022-01-01",
       "time": "10:00"
-    },
-    {
-      "firstName": "dsa",
-      "lastName": "dsa",
-      "email": "dsadsa@wp.pl",
-      "date": "1111-11-11",
-      "time": "11:11",
-      "id": 2
-    },
-    {
-      "firstName": "mATEUSZ",
-      "lastName": "BOGO",
-      "email": "BOGO@MAT.PL",
-      "date": "2222-22-22",
-      "time": "22:22",
-      "id": 3
-    },
-    {
-      "firstName": "Mateusz",
-      "lastName": "Bogolubow",
-      "email": "mateusz@bogolubow.com",
-      "date": "3333-33-33",
-      "time": "33:33",
-      "id": 4
-    },
-    {
-      "firstName": "mate",
-      "lastName": "fdsfsd",
-      "email": "dsa@wp.pl",
-      "date": "3333-33-33",
-      "time": "33:33",
-      "id": 5
     }
   ]
 }
