@@ -1,3 +1,10 @@
+> ⭐ ***README** to coś więcej niż opis. Poprzez nie **pokazujesz swoje mocne strony** – swoją dokładność, sposób myślenia i podejście do rozwiązywania problemów. Niech Twoje README pokaże, że masz **świetne predyspozycje do rozwoju!***
+> 
+> 🎁 *Zacznij od razu. Skorzystaj z **[szablonu README i wskazówek](https://github.com/devmentor-pl/readme-template)**.* 
+
+&nbsp;
+
+
 # React Redux Calendar
 
 Otrzymaliśmy zlecenie przebudowania aplikacji, która przechowuje informacje o terminie spotkania z konkretną osobą wykorzystując mechanizm `state` dostępny w React. 
@@ -132,3 +139,10 @@ Możesz wykorzystać komponenty z poprzedniego projektu tj. `task-react-styling`
 
 W tym przypadku zwróć uwagę na elementy, które były problematyczne przy przenoszeniu kodu do innego projektu. Ta wiedza powinna być Ci przydatna podczas tworzenia następnych rozwiązań.
 
+
+
+&nbsp;
+
+> ⭐ ***README** to coś więcej niż opis. Poprzez nie **pokazujesz swoje mocne strony** – swoją dokładność, sposób myślenia i podejście do rozwiązywania problemów. Niech Twoje README pokaże, że masz **świetne predyspozycje do rozwoju!***
+> 
+> 🎁 *Zacznij od razu. Skorzystaj z **[szablonu README i wskazówek](https://github.com/devmentor-pl/readme-template)**.* 
