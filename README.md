@@ -129,7 +129,9 @@ Spróbuj teraz podłaczyć Magazyn do wtyczki Redux DevTools i zobacz jak się o
 
 Wykonaj refaktoryzację kodu - np. zapytania do API wrzuć do osobnego pliku w katalogu `providers`.
 
-Być może będziesz chciał podzielić komponenty na mniejsze lub wykorzystać Hooki. 
+Być może będziesz chciał podzielić komponenty na mniejsze lub wykorzystać *hooki* tworząc komponenty funkcyjne. 
+
+Dzięki implementacji Redux-a możesz też przenieść logikę działania aplikacji do poszczególnych komponentów (w `<CalendarList>` pobieranie danych z API, a w `<CalendarForm>` dodawanie danych do API), co pozwoli odchudzić i zwiększyć czytelność komponentu `<Calendar>`.
 
 Przygotuj kod w taki sposób, jakby ten porojekt miał zedecydować o Twoim przyjęciu do pracy.
 
