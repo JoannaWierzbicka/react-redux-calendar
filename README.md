@@ -7,55 +7,56 @@
 
 # React Redux Calendar
 
-Otrzymaliśmy zlecenie przebudowania aplikacji, która przechowuje informacje o terminie spotkania z konkretną osobą wykorzystując mechanizm `state` dostępny w React. 
+Otrzymaliśmy zlecenie przebudowania reactowej aplikacji, która informacje o umówionych spotkaniach przechowuje w `state`. 
 
-Niestety zarządzanie projektem w ten sposów zaimplementowanym jest dość problematyczne ponieważ musimy przekazywać przez `props` dane ze `state` z najwyższego komponentu tj `Calendar` do jego potomków. W momencie utworzenia większej ilości komponentów będzie to prawdziwe utrapienie.
+Niestety zarządzanie takim projektem jest dość problematyczne, ponieważ dane ze `state` najwyższego komponentu (`Calendar`) musimy przekazywać do jego potomków przez `props`. Obsługa większej ilości komponentów przy dotychczasowym rozwiązaniu byłaby prawdziwym utrapieniem.
 
-Naszym zadaniem będzie przebudowanie mechanizmu `state` z React na zarządzanie stanem aplikacji wykorzystując Redux.
-Co ma ułatwić zadządzanie naszą aplikacją i ułatwić jej rozbudowę.
+Naszym zadaniem będzie przebudowanie mechanizmu zarządzania stanem na taki, który wykorzystuje Reduxa. Ułatwi to nie tylko obsługę komponentów, ale i rozbudowę aplikacji.
 
 ## Przygotowania środowiska pracy
 
-### instalacja paczek
+### Instalacja paczek
 
-W pliku `package.json` mamy zapisane zależności (tj. niezbędne paczki), które pozwolą nam uruchomić aplikacje.
+W pliku `package.json` mamy zapisane zależności (tj. niezbędne paczki), które pozwolą nam uruchomić aplikację.
 
-Musimy w pierwszej kolejności je zainstalować tj. w terminalu uruchomić `npm i` będąc w katalogu głównym naszej aplikacji.
+W pierwszej kolejności musimy je zainstalować. Zrobimy to, będąc w katalogu głównym naszej aplikacji, za pomocą komendy `npm i`.
 
-Po instalacji możemy uruchomić webpack-a używając komendy `npm start`, która również została zapisane w pliku `package.json`.
+Po instalacji możemy uruchomić webpack komendą `npm start`, która również została zapisana w pliku `package.json`.
 
-Natomiast w pliku `webpack.config.js` znajdziemy minimalna, niezbędną konfigurację webpacka-a w celu uruchomienia lokalnego serwera, natomiast w pliku `.babelrc` mamy ustawienia związane z babel-em tj. narzędzia, który transpiluje kod. 
+Natomiast w pliku `webpack.config.js` znajdziemy minimalną, niezbędną konfigurację webpacka dla uruchomienia lokalnego serwera, a w pliku `.babelrc` mamy ustawienia związane z Babelem – narzędziem, które transpiluje kod. 
 
 
-### json-server
+### JSON Server – przypomnienie
 
-> Jeśli wykonałeś poprzednie zadanie tj. **React Calendar** to te czynności zapowne już wykonywałeś.
+> Jeśli robiłeś co najmniej poprzedni projekt kalendarza, tj. **React Calendar**, to poniższe czynności zapewne już wykonałeś.
 
-Danę są przechowywane na lokalny API, wykorzystując [json-server](https://github.com/typicode/json-server). 
+Dane są przechowywane w pliku `data.json` i pobierane za pomocą lokalnego API z wykorzystaniem [JSON Servera](https://github.com/typicode/json-server).
 
-Wspomniane rozwiązania zainstalujemy dzięki [npm](https://pl.wikipedia.org/wiki/Npm_(manager_pakiet%C3%B3w)) więc musimy mieć zainstalowany [Node.js](https://nodejs.org) w wersji co najmniej 10.16.
+Zainstalujemy go dzięki [npm](https://pl.wikipedia.org/wiki/Npm_(manager_pakiet%C3%B3w)), więc musimy mieć zainstalowany [Node.js](https://nodejs.org) w wersji co najmniej 10.16.
 
-Jeśli nie jesteś pewny jaką wersję posiadasz to możesz to sprawdzić za pomocą flagi `-v` tj `node -v`.
+Jeśli nie jesteś pewny, jaką wersję posiadasz, to możesz to sprawdzić za pomocą flagi `-v`, tj. `node -v`.
 
-Instalujemy globalnie `json-server` dlatego warto mieść uprawnienia administratora (sudo na Linux-ie), aby móc to zrobić.
+Paczka  `json-server`  powinna być zainstalowana globalnie, dlatego warto mieć uprawnienia administratora (sudo na Linuksie), aby móc to zrobić.
 
-W terminalu wpisujemy komendę:
+W terminalu wpisz komendę:
 
 ```
 npm install -g json-server@0.17
 ```
 
-Po instalacji powinniśmy mieć dostęp do informacji o zainstalowanej wersji 
+Po instalacji powinieneś mieć dostęp do informacji o zainstalowanej wersji: 
 
 ```
 json-server -v
 ```
 
-Jeśli masz już uruchomienego webpacka (`npm start`), to w kolejnym terminalu (lub wierszu poleceń) powinisśmy odpalić nasze API tj.
+Jeśli masz już uruchomionego webpacka (`npm start`), to w kolejnym terminalu (wierszu poleceń) uruchom API:
 
 ```
 json-server --watch ./db/data.json --port 3005
 ```
+
+Ustawiamy inny port niż domyślny (3000), aby być pewnym, że nic go nie blokuje.
 
 Od teraz możesz korzystać z API pod adresem:
 
@@ -63,19 +64,19 @@ Od teraz możesz korzystać z API pod adresem:
 http://localhost:3005/meetings
 ```
 
-> **Uwaga!** json-server musi zawsze być uruchomiony jeśli API ma działać. 
+> **Uwaga!** Jeśli API ma działać, json-server zawsze musi być uruchomiony. 
 
 ## Implementacja
 
 ### Magazyn + Reducer
 
-W pierwszej kolejności utworzymy Magazyn. Musimy zastanowić się, w którym miejscu mamy go utworzyć.
+W pierwszej kolejności utworzymy Magazyn (Store). Musimy się zastanowić, w którym miejscu to zrobić.
 
-Nasz `state` jest w `<Calendar/>` jednak jest on stanem tylko dla tego komponentu. Równie dobrze moglibyśmy przenieść go do pliku `index.js` i tam przekazywać z rodzica do dziecka, aż do `<Calendar/>`.
+Nasz `state` jest w `<Calendar/>`, jednak jest on stanem tylko dla tego komponentu. Równie dobrze moglibyśmy przenieść stan do pliku `index.js` i tam przekazywać go z rodzica do dziecka, aż do `<Calendar/>`.
 
-Nie będziemy tego robić, ale nasz Magazyn właśnie tam utworzymy ponieważ będzie to stan naszej całej aplikacji.
+Nie będziemy tego robić, ale Magazyn utworzymy właśnie w `index.js`, ponieważ będzie to stan całej aplikacji.
 
-Podczas tworzenie Magazunu (Store), tworzymu również Readucer-a w lokalizacji `./src/reducers/index.js`, który będzie zwraca na razie jedynie stan początkowy jakim będzie obiekt z właściwością `meetings` tj.
+W lokalizacji `./src/reducers/index.js` tworzymy również Reducer, który będzie zwracał na razie jedynie stan początkowy – obiekt z właściwością `meetings`:
 
 ```javascript
 {
@@ -83,64 +84,63 @@ Podczas tworzenie Magazunu (Store), tworzymu również Readucer-a w lokalizacji 
 }
 ```
 
-To również dobry moment, aby za pomocą `<Provider/>` przekazać do pozostałych komponentów naszego Store-a.
+To również dobry moment, aby za pomocą `<Provider/>` przekazać do pozostałych komponentów nasz Store.
 
 
 ### Action + Reducer
 
-Zastanówmy się teraz jakie akcje mamy w naszym `<Calendar/>`. Należy spojrzeć na to w taki sposób tj. jakie mamy czynności, które operują na `state` w `<Calendar/>`?
+Zastanówmy się teraz, jakie akcje mamy w naszym `<Calendar/>`. Należy spojrzeć na to w taki sposób: jakie mamy czynności, które operują na `state` w `<Calendar/>`?
 
-Pewnie będzie to wczytanie wszysktich danych z API oraz dodanie utworzonego elementu przez formularz. Dlatego zdefiniujmy sobie 2 akcje:
+Pewnie będzie to wczytanie wszystkich danych z API oraz dodanie nowego elementu przez formularz. Dlatego zdefiniujmy sobie dwie akcje:
 
 * loadMeetingsAction
 * saveMeetingAction
 
-Obie akcje zdefiniujmy w pliku `./src/actions/calendar.js`. Zauważmy również, że muszą one nieść ze sobą ładnek w postaci danych, które mają zostać dodane naszego Magazynu.
+Obie akcje zdefiniujmy w pliku `./src/actions/calendar.js`. Zauważmy również, że muszą one nieść ze sobą ładunek w postaci danych, które mają zostać dodane do naszego Magazynu.
 
-W przypadku `loadMeetingsAction` to będą dane pobrane z API. Natomiast dla `saveMeetingAction` będzie to obiekt przechowujący dane o nowym spotkaniu.
+W przypadku `loadMeetingsAction` ładunkiem będą dane pobrane z API. Natomiast dla `saveMeetingAction` będzie to obiekt przechowujący dane o nowym spotkaniu.
 
-Kiedy mamy już zdefiniowane (i wyeksportowane Akcje) to powinniśmy zmodyfikować Reduxer-a, który powinien absłużyć zdefiniowane akcje. Należy pamiętać o tworzeniu kopii dla `state`!
+Kiedy mamy już zdefiniowane (i wyeksportowane) Akcje, powinniśmy zmodyfikować Reducera – tak aby te akcje obsługiwał. Należy pamiętać o tworzeniu kopii dla `state`!
 
 ### connect()
 
-Nadszedł czas na połącznie naszego Magazynu z naszym `<Calendar/>` ponieważ to w nim są czynności (czyli docelowo Akcje), które będą operować na stanie aplikacji.
+Nadszedł czas na połącznie Magazynu z komponentem `<Calendar/>`, ponieważ to w nim są czynności (czyli Akcje), które operują na stanie aplikacji.
 
-Importujemy `connect()` i wskazujemy przez map-owanie jakie Stany i Akcje nas interesują w `<Calendar/>`.
-Na pewno potrzebujemy listy spotkań tj. `meetings` i potrzebujemy obu Akcji, które musimy zaimportować.
+Importujemy `connect()` i wskazujemy przez mapowanie, jakie Stany i Akcje nas interesują w `<Calendar/>`.
+Na pewno potrzebujemy listy spotkań (`meetings`) i obu Akcji, które musimy zaimportować.
 
-Nasze połącznie powinno wyglądac mniej więcej tak:
+Nasze połącznie powinno wyglądać mniej więcej tak:
 
 ```javascript
 export default connect(mapStateToProps, mapActionToProps)(Calendar);
 ```
 
-Jeśli wszystko wykonaliśmy prawidłowo to od teraz nie musimy już korzystać ze state w `<Calendar/>`. Wystarczy, że będziemy przekazywać `this.props.meetings` do `<CalendarList />`.
+Jeśli wszystko wykonaliśmy prawidłowo, to od teraz nie musimy już korzystać ze `state` w `<Calendar/>`. Wystarczy, że będziemy przekazywać `this.props.meetings` do `<CalendarList />`.
 
-### state w `<CalendarForm/>`
+### `state` w `<CalendarForm/>`
 
-Używanie Redux-a nie wyklucza korzystanie z React-owego `state`. Jeśli potrzebujemy stanu lokalnego (a w szcególności, gdy tworzymy komponenty kontrolowane) to nic nie stoi na przeszkodzie, aby go używać.
+Używanie Reduxa nie wyklucza korzystania z reactowego `state`. Jeśli potrzebujemy stanu lokalnego (w szczególności gdy tworzymy komponenty kontrolowane), to nic nie stoi na przeszkodzie, aby go używać.
 
 
 ### Redux DevTools
 
-Spróbuj teraz podłaczyć Magazyn do wtyczki Redux DevTools i zobacz jak się ona zachowuje w czasie pracy naszej aplikacji.
+Spróbuj teraz podłączyć Magazyn do wtyczki Redux DevTools i zobacz, jak się ona zachowuje w czasie pracy naszej aplikacji.
 
 ## Usprawnij swój kod
 
-Wykonaj refaktoryzację kodu - np. zapytania do API wrzuć do osobnego pliku w katalogu `providers`.
+Wykonaj refaktoryzację kodu, np. zapytania do API wrzuć do osobnego pliku w katalogu `providers`.
 
-Być może będziesz chciał podzielić komponenty na mniejsze lub wykorzystać *hooki* tworząc komponenty funkcyjne. 
+Być może będziesz chciał podzielić komponenty na mniejsze lub wykorzystać hooki, tworząc komponenty funkcyjne. 
 
-Dzięki implementacji Redux-a możesz też przenieść logikę działania aplikacji do poszczególnych komponentów (w `<CalendarList>` pobieranie danych z API, a w `<CalendarForm>` dodawanie danych do API), co pozwoli odchudzić i zwiększyć czytelność komponentu `<Calendar>`.
+Dzięki implementacji Reduxa możesz też przenieść logikę działania aplikacji do poszczególnych komponentów (w `<CalendarList>` pobieranie danych z API, a w `<CalendarForm>` dodawanie danych do API), co pozwoli odchudzić komponent `<Calendar>` i zwiększyć jego czytelność.
 
-Przygotuj kod w taki sposób, jakby ten porojekt miał zedecydować o Twoim przyjęciu do pracy.
+Przygotuj kod w taki sposób, jakby projekt ten miał zdecydować o Twoim przyjęciu do pracy.
 
 ## Dodaj odpowiedni wygląd
 
-Możesz wykorzystać komponenty z poprzedniego projektu tj. `task-react-styling`, aby upiększyć formularz w odpowiedni sposób.
+Dla formularza możesz wykorzystać np. komponenty z poprzedniego projektu „Neumorfizm” (`task-react-styling`).
 
-W tym przypadku zwróć uwagę na elementy, które były problematyczne przy przenoszeniu kodu do innego projektu. Ta wiedza powinna być Ci przydatna podczas tworzenia następnych rozwiązań.
-
+W takim przypadku przy przenoszeniu kodu do innego projektu zwróć uwagę na elementy problematyczne. Ta wiedza powinna przydać Ci się podczas tworzenia następnych rozwiązań.
 
 
 &nbsp;
