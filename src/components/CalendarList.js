@@ -6,9 +6,7 @@ class CalendarList extends React.Component {
     }
 
     renderMeetingsList() {
-        return this.props.meetings.map(item => 
-            this.renderMeetingsItem(item)
-        );
+        return this.props.meetings.map((item) => this.renderMeetingsItem(item));
     }
 
     renderMeetingsItem(itemData) {
