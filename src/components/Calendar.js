@@ -4,15 +4,17 @@ import CalendarList from "./CalendarList";
 import CalendarForm from "./CalendarForm";
 import { useDispatch, useSelector } from "react-redux";
 
+import StyledSection from "../styled/StyledSection";
+
 import { loadMeetingsAction, saveMeetingAction } from "../actions/calendar";
 
 const Calendar = () => {
   const apiUrl = "http://localhost:3005/meetings";
+
   const dispatch = useDispatch();
   const meetings = useSelector((state) => state.meetings);
-  const [dataMeetings, setDataMeetings] = React.useState(meetings);
 
-  const loadMeetingsFromApi = React.useCallback(() => {
+  const loadMeetingsFromApi = () => {
     fetch(apiUrl)
       .then((resp) => {
         if (resp.ok) {
@@ -26,9 +28,9 @@ const Calendar = () => {
       .catch((error) => {
         console.error(error);
       });
-  }, [dispatch]);
+  };
 
-  const sendMeetingToApi = React.useCallback((meetingData) => {
+  const sendMeetingToApi = (meetingData) => {
     fetch(apiUrl, {
       method: "POST",
       body: JSON.stringify(meetingData),
@@ -49,17 +51,17 @@ const Calendar = () => {
       .catch((err) => {
         console.log(err);
       });
-  }, []);
+  };
 
   React.useEffect(() => {
     loadMeetingsFromApi();
   }, []);
 
   return (
-    <section>
+    <StyledSection>
       <CalendarList meetings={meetings} />
       <CalendarForm saveMeeting={sendMeetingToApi} />
-    </section>
+    </StyledSection>
   );
 };
 
