@@ -7,6 +7,6 @@ export const loadMeetingsAction = (dataFromAPI) => ({
 }) 
 
 export const saveMeetingAction = (newMeeting) => ({
-    type: SAVE,
-    payload: {newMeeting}
-})
+  type: SAVE,
+  payload: newMeeting,
+});

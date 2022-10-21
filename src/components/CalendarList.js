@@ -10,6 +10,7 @@ class CalendarList extends React.Component {
     }
 
     renderMeetingsItem(itemData) {
+        console.log(itemData);
         return (
             <li key={itemData.id}>
                 {itemData.date} {itemData.time} => 
