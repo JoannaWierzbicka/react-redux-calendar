@@ -4,63 +4,33 @@ import CalendarList from "./CalendarList";
 import CalendarForm from "./CalendarForm";
 import { useDispatch, useSelector } from "react-redux";
 
+import { removeMeeting } from "../actions/calendar";
+
 import StyledSection from "../styled/StyledSection";
 
-import { loadMeetingsAction, saveMeetingAction } from "../actions/calendar";
+import CalendarApi from "../api/CalendarApi";
 
 const Calendar = () => {
-  const apiUrl = "http://localhost:3005/meetings";
-
   const dispatch = useDispatch();
   const meetings = useSelector((state) => state.meetings);
 
-  const loadMeetingsFromApi = () => {
-    fetch(apiUrl)
-      .then((resp) => {
-        if (resp.ok) {
-          return resp.json();
-        }
-        throw new Error("Network error!");
-      })
-      .then((data) => {
-        dispatch(loadMeetingsAction(data));
-      })
-      .catch((error) => {
-        console.error(error);
-      });
-  };
-
-  const sendMeetingToApi = (meetingData) => {
-    fetch(apiUrl, {
-      method: "POST",
-      body: JSON.stringify(meetingData),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    })
-      .then((resp) => {
-        if (resp.ok) {
-          return resp.json();
-        }
-
-        throw new Error("Network error!");
-      })
-      .then((meetingData) => {
-        dispatch(saveMeetingAction(meetingData));
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
+  const dataAPI = new CalendarApi();
 
   React.useEffect(() => {
-    loadMeetingsFromApi();
+    dataAPI.loadMeetingsFromApi(dispatch);
   }, []);
+
+  const removeItem = (id) => {
+    dataAPI.removeMeetingFromApi(id, dispatch);
+  };
 
   return (
     <StyledSection>
-      <CalendarList meetings={meetings} />
-      <CalendarForm saveMeeting={sendMeetingToApi} />
+      <CalendarList meetings={meetings} removeItem={removeItem} />
+      <CalendarForm
+        saveMeeting={dataAPI.sendMeetingToApi}
+        dispatch={dispatch}
+      />
     </StyledSection>
   );
 };

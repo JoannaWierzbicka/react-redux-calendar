@@ -154,10 +154,10 @@ class CalendarForm extends React.Component {
   };
 
   saveMeeting() {
-    const { saveMeeting } = this.props;
+    const { saveMeeting, dispatch } = this.props;
 
     if (typeof saveMeeting === "function") {
-      saveMeeting(this.getFieldsData());
+      saveMeeting(this.getFieldsData(), dispatch);
     }
   }
 
