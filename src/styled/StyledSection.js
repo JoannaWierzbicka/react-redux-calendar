@@ -9,10 +9,6 @@ export const StyledSection = styled.section`
     flex-direction: column;
     align-items: center;
   }
-  @media only screen and (max-width: 600px) {
-    flex-direction: column;
-    align-items: flex-start;
-  }
 `;
 
 export default StyledSection;

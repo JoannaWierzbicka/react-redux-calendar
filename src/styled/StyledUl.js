@@ -6,10 +6,12 @@ export const StyledUl = styled.ul`
   justify-content: space-around;
   width: 50%;
   margin-top: 0;
+  padding-inline-start: 0;
   @media only screen and (max-width: 900px) {
     margin-top: 10px;
   }
-  @media only screen and (max-width: 600px) {
+  @media only screen and (max-width: 750px) {
+    width: 100%;
   }
 `;
 
