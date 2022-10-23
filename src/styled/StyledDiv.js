@@ -5,7 +5,7 @@ export const StyledDiv = styled.div`
   display: flex;
   justify-content: flex-end;
   &.meeting-info-container {
-    flex-direction: column;
+    align-items: center;
   }
 `;
 

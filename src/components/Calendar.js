@@ -1,14 +1,11 @@
 import React from "react";
+import { useDispatch, useSelector } from "react-redux";
 
 import CalendarList from "./CalendarList";
 import CalendarForm from "./CalendarForm";
-import { useDispatch, useSelector } from "react-redux";
-
-import { removeMeeting } from "../actions/calendar";
+import CalendarApi from "../api/CalendarApi";
 
 import StyledSection from "../styled/StyledSection";
-
-import CalendarApi from "../api/CalendarApi";
 
 const Calendar = () => {
   const dispatch = useDispatch();
@@ -20,17 +17,13 @@ const Calendar = () => {
     dataAPI.loadMeetingsFromApi(dispatch);
   }, []);
 
-  const removeItem = (id) => {
-    dataAPI.removeMeetingFromApi(id, dispatch);
-  };
-
   return (
     <StyledSection>
-      <CalendarList meetings={meetings} removeItem={removeItem} />
       <CalendarForm
-        saveMeeting={dataAPI.sendMeetingToApi}
-        dispatch={dispatch}
+        saveMeeting={(data) => dataAPI.sendMeetingToApi(data, dispatch)}
       />
+      <CalendarList meetings={meetings} removeItem={(id) => dataAPI.removeMeetingFromApi(id, dispatch)} />
+      
     </StyledSection>
   );
 };

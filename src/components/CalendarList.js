@@ -9,7 +9,9 @@ import { faCalendarDays, faClock } from "@fortawesome/free-solid-svg-icons";
 
 class CalendarList extends React.Component {
   render() {
-    return <StyledUl>{this.renderMeetingsList()}</StyledUl>;
+    return <StyledUl>
+      {this.renderMeetingsList()}
+      </StyledUl>;
   }
 
   renderMeetingsList() {
@@ -22,14 +24,13 @@ class CalendarList extends React.Component {
     return (
       <StyledLi key={itemData.id}>
         <StyledDiv className={"meeting-info-container"}>
-          git
           <StyledLink href={`mailto: ${itemData.email}`}>
             {itemData.firstName} {itemData.lastName}
           </StyledLink>
-          <p>
+          <p style={{ padding: "0 6px" }}>
             <FontAwesomeIcon icon={faCalendarDays} /> {itemData.date}
           </p>
-          <p>
+          <p style={{ padding: "0 6px" }}>
             <FontAwesomeIcon icon={faClock} /> {itemData.time}
           </p>
           <StyledButton onClick={() => this.props.removeItem(itemData.id)}>

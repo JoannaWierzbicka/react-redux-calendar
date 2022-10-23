@@ -18,6 +18,7 @@ class CalendarForm extends React.Component {
     return (
       <StyledForm action="" onSubmit={this.handleSubmit}>
         <ul>{this.renderErrors()}</ul>
+        <h3>Dodaj spotkanie: </h3>
         <StyledDiv>
           <label>
             Data:{" "}
@@ -154,10 +155,10 @@ class CalendarForm extends React.Component {
   };
 
   saveMeeting() {
-    const { saveMeeting, dispatch } = this.props;
+    const { saveMeeting } = this.props;
 
     if (typeof saveMeeting === "function") {
-      saveMeeting(this.getFieldsData(), dispatch);
+      saveMeeting(this.getFieldsData());
     }
   }
 

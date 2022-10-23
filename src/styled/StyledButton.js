@@ -6,6 +6,10 @@ export const StyledButton = styled.button`
   background-color: #86adcc;
   padding: 4px;
   cursor: pointer;
+  &:hover {
+    background-color: #050634;
+    color: white;
+  }
 `;
 
 export default StyledButton;

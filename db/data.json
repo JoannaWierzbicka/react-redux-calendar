@@ -1,20 +1,52 @@
 {
   "meetings": [
     {
-      "firstName": "Jan",
-      "lastName": "Kowalski",
-      "email": "jan@kowalski.pl",
-      "date": "2022-10-22",
-      "time": "11:30",
+      "firstName": "Joanna",
+      "lastName": "Nowak",
+      "email": "joanna@nowak.pl",
+      "date": "2022-10-12",
+      "time": "12:30",
       "id": 1
     },
     {
       "firstName": "Piotr",
-      "lastName": "Nowak",
-      "email": "piotr@nowak.pl",
-      "date": "2023-01-05",
-      "time": "12:00",
+      "lastName": "Małecki",
+      "email": "piotr@malecki.pl",
+      "date": "2023-04-11",
+      "time": "15:00",
       "id": 2
+    },
+    {
+      "firstName": "Weronika",
+      "lastName": "Strzelecka",
+      "email": "weronika@strzelecka.pl",
+      "date": "2023-01-07",
+      "time": "11:00",
+      "id": 4
+    },
+    {
+      "firstName": "Anna",
+      "lastName": "Piotrkowska",
+      "email": "anna@piotrkowska.pl",
+      "date": "2023-04-01",
+      "time": "12:00",
+      "id": 5
+    },
+    {
+      "firstName": "Andrzej",
+      "lastName": "Kowalski",
+      "email": "andrzej@kowalski.pl",
+      "date": "2022-12-15",
+      "time": "11:00",
+      "id": 6
+    },
+    {
+      "firstName": "Michał",
+      "lastName": "Piszczek",
+      "email": "michal@piszczek.pl",
+      "date": "2022-11-17",
+      "time": "09:30",
+      "id": 7
     }
   ]
 }
