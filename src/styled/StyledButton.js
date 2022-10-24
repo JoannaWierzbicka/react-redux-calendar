@@ -7,7 +7,8 @@ export const StyledButton = styled.button`
   padding: 4px;
   cursor: pointer;
   &:hover {
-    background-color: #050634;
+    transition: 0.4s linear;
+    background-color: #f97066;
     color: white;
   }
 `;

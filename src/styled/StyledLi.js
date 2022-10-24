@@ -7,7 +7,9 @@ export const StyledLi = styled.li`
   margin-bottom: 8px;
   padding: 7px;
   text-align: center;
+  height: fit-content;
   &:hover {
+    transition: 0.4s linear;
     background-color: #dde7fd;
   }
 `;

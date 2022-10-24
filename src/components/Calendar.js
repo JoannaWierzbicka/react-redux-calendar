@@ -22,8 +22,10 @@ const Calendar = () => {
       <CalendarForm
         saveMeeting={(data) => dataAPI.sendMeetingToApi(data, dispatch)}
       />
-      <CalendarList meetings={meetings} removeItem={(id) => dataAPI.removeMeetingFromApi(id, dispatch)} />
-      
+      <CalendarList
+        meetings={meetings}
+        removeItem={(id) => dataAPI.removeMeetingFromApi(id, dispatch)}
+      />
     </StyledSection>
   );
 };
