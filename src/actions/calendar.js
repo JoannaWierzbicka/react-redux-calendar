@@ -2,9 +2,9 @@ export const LOAD = "calendar/LOAD";
 export const SAVE = "calendar/save";
 export const REMOVE = "calendar/remove";
 
-export const loadMeetingsAction = (dataFromAPI) => ({
+export const loadMeetingsAction = (data) => ({
   type: LOAD,
-  payload: dataFromAPI,
+  payload: data,
 });
 
 export const saveMeetingAction = (newMeeting) => ({
@@ -12,7 +12,7 @@ export const saveMeetingAction = (newMeeting) => ({
   payload: newMeeting,
 });
 
-export const removeMeeting = (id) => ({
+export const removeMeetingAction = (id) => ({
   type: REMOVE,
   payload: { id },
 });

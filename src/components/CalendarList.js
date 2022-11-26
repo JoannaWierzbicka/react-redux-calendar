@@ -20,6 +20,13 @@ class CalendarList extends React.Component {
       .map((item) => this.renderMeetingsItem(item));
   }
 
+  removeItem(item){
+    if(window.confirm('Czy na pewno usunąć to spotkanie?')){
+      this.props.removeItem(item)
+    }
+    
+  }
+
   renderMeetingsItem(itemData) {
     return (
       <StyledLi key={itemData.id}>
@@ -33,7 +40,7 @@ class CalendarList extends React.Component {
           <p style={{ padding: "0 6px" }}>
             <FontAwesomeIcon icon={faClock} /> {itemData.time}
           </p>
-          <StyledButton onClick={() => this.props.removeItem(itemData.id)}>
+          <StyledButton onClick={() => this.removeItem(itemData.id)}>
             DELETE
           </StyledButton>
         </StyledDiv>
